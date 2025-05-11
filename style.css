@@ -1,6 +1,6 @@
 /* MAIN */
 body {
-  padding-top: 100px; /* deadspace */
+  padding-top: 150px; /* deadspace */
   padding-bottom: 100px; /* deadspace */
   display: flex;
   flex-direction: column;
@@ -20,6 +20,10 @@ h1 {
   font-size: 20px;
   font-family: monospace;
   color: orange;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Header2 */
@@ -30,28 +34,61 @@ h2 {
 }
 
 /* ANIMATION */
+/* Typing Animation */
 @keyframes typing {
   from { width: 0 }
-  to { width: 16ch }
+  to { width: 100% }
 }
 
+/* Blink for cursor */
 @keyframes blink {
-  50% { border-color: transparent }
+  50% { opacity: 0; }
 }
 
-/* CLASSES */
+/* Fade in for elements */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+@keyframes fade-down {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+}
+/* CLASSES */
 /* Heading Animation */
 .typing {
   font-size: 3em;
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 2px solid orange;
-  width: 16ch;
+  color: orange;
   margin: 0;
-  animation: 
-    typing 2.5s steps(16, end) forwards,
-    blink 0.75s step-end infinite;
+  display: inline-block;
+  position: relative;
+}
+
+.typing::after {
+  content: '|';
+  animation: blink 1s step-start infinite;
+  color: orange;
+}
+
+/* Fade in for header IMG */
+.fade-in {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  animation: fade-down 1s ease-out both;
 }
 
 /* Top Photo */
@@ -70,6 +107,7 @@ h2 {
   border-radius: 20px;
   object-fit: cover;
 }
+
 /* Grid for Videos */
 .video-gallery {
   display: grid;
@@ -162,11 +200,11 @@ h2 {
 /* Everything in the top left box */
 .circle-button-wrapper {
   position: fixed;
-  top: 100px;
-  left: 50px;
+  top: 10px;
+  left: 25px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: right;
   z-index: 1000;
 }
 
@@ -177,10 +215,10 @@ h2 {
   align-items: center;
   width: 100px;
   height: 100px;
-  border-radius: 50%;
-  text-decoration: none;
+  border-radius: 100%;
   overflow: hidden;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease;
+  box-shadow: 0 0px 10px rgba(255, 255, 255, 1);
 }
 
 /* Top Left Button Image */
@@ -201,37 +239,43 @@ h2 {
 
 /* Text for top left button */
 .circle-button-label {
-  margin-top: 8px;
+  margin-top: 25px;
   color: white;
-  font-size: 14px;
+  font-size: 30px;
   font-family: monospace;
-  background: #1a1a1a;
-  padding: 2px 12px;
+  padding: 10px 20px;
   border-radius: 4px;
-}
+  text-shadow: 0px 0px 8px white;
+} 
 
+/* Navigation Bar */
 .top-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #1a1a1a;
+  position: fixed;  
+  top: 20px;
+  right: 50px;
+  width: 300px;
+  background-color: #313131;
   padding: 15px 0;
   display: flex;
   justify-content: center;
-  gap: 40px;
-  z-index: 1001;
+  gap: 50px;
+  z-index: 1001; /* layer above rest of elements */
   border-bottom: 1px solid #333;
+  animation: fade-up 0.5s;
+  border-radius: 50px;
 }
 
+/* Navigation Bar Text */
 .top-nav a {
-  color: rgb(143, 142, 142);
+  color: orange;
   text-decoration: none;
   font-family: monospace;
   font-size: 18px;
   transition: color 0.2s;
 }
 
+/* Navigation Bar Hovering Text */
 .top-nav a:hover {
-  color: orange;
+  color: rgb(87, 137, 179);
+  transform: scale(0.95);
 }
